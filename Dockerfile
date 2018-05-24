@@ -9,7 +9,9 @@ RUN apk add --no-cache \
             curl \
             wget \
             rsync \
+            lftp \
             supervisor
+            
 RUN mkdir /opt /opt/scripts
 RUN mkdir /etc/supervisord.d
 

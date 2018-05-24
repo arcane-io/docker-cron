@@ -4,7 +4,6 @@
 [![Twitter](https://img.shields.io/docker/pulls/arcaneio/docker-cron.svg?style=flat)](https://hub.docker.com/r/arcaneio/docker-cron/)
 [![Docker Build Status](https://img.shields.io/microbadger/image-size/arcaneio/docker-cron.svg?style=flat)](https://hub.docker.com/r/arcaneio/docker-cron/)
 
-
 ## Usage
 
 In order to create cron jobs add environment properties that start with 'CRON_' (the name must be unique) and have the value with the format ```<cron-value> <command>```.
@@ -40,6 +39,31 @@ version: '3'
 
 volumes:
   local-data:
+
+services:
+  consumer: 
+    image: httpd
+    container_name: ftp-data-consumer
+    ports:
+      - 8001:80
+    volumes:
+      - local-data:/usr/local/apache2/htdocs/data
+  cron:
+    image: arcaneio/docker-cron
+    container_name: test-data-sync
+    environment:
+      CRON_RSYNC: '*/5 * * * * lftp -c "set ftp:list-options -a; open ftp://tgftp.nws.noaa.gov/data/tampa/; lcd /opt/synchronized-data; mirror --only-missing --only-newer --verbose --delete --allow-chown --allow-suid --no-umask --parallel=5"​'
+    volumes:
+      - local-data:/opt/synchronized-data
+```
+
+Synchronize data from ftp location and share it with the http server through shared volume and ftp address mounted as volume.
+
+```yaml
+version: '3'
+
+volumes:
+  local-data:
   ftp-location:
     driver: valuya/curlftpfs:next # NOTE make sure you have the driver plugin installed: docker plugin install valuya/curlftpfs:next DEBUG=1
     driver_opts:
@@ -56,7 +80,7 @@ services:
   cron:
     image: arcaneio/docker-cron
     container_name: test-data-sync
-    environment: 
+    environment:
       CRON_RSYNC: "*/5 * * * * rsync -rzvt --inplace --update --progress --stats /opt/ftp-data/ /opt/synchronized-data"
     volumes:
       - ftp-location:/opt/ftp-data

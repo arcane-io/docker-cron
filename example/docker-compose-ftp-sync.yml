@@ -1,0 +1,20 @@
+version: '3'
+
+volumes:
+  local-data:
+
+services:
+  consumer: 
+    image: httpd
+    container_name: ftp-data-consumer
+    ports:
+      - 8001:80
+    volumes:
+      - local-data:/usr/local/apache2/htdocs/data
+  cron:
+    image: arcaneio/docker-cron
+    container_name: test-data-sync
+    environment: 
+      CRON_RSYNC: '*/5 * * * * lftp -c "set ftp:list-options -a; open ftp://tgftp.nws.noaa.gov/data/tampa/; lcd /opt/synchronized-data; mirror --only-missing --only-newer --verbose --delete --allow-chown --allow-suid --no-umask --parallel=5"​'
+    volumes:
+      - local-data:/opt/synchronized-data
