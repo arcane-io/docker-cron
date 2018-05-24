@@ -1,8 +1,8 @@
 # docker-cron
 
+[![Docker Pulls](https://img.shields.io/docker/pulls/arcaneio/docker-cron.svg?style=flat)](https://hub.docker.com/r/arcaneio/docker-cron/)
+[![Docker Automated build](https://img.shields.io/docker/automated/arcaneio/docker-cron.svg?style=flat)](https://hub.docker.com/r/arcaneio/docker-cron/)
 [![Docker Build Status](https://img.shields.io/docker/build/arcaneio/docker-cron.svg?style=flat)](https://hub.docker.com/r/arcaneio/docker-cron/)
-[![Twitter](https://img.shields.io/docker/pulls/arcaneio/docker-cron.svg?style=flat)](https://hub.docker.com/r/arcaneio/docker-cron/)
-[![Docker Build Status](https://img.shields.io/microbadger/image-size/arcaneio/docker-cron.svg?style=flat)](https://hub.docker.com/r/arcaneio/docker-cron/)
 
 ## Usage
 
