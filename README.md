@@ -1,8 +1,8 @@
 # docker-cron
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/arcaneio/docker-cron.svg?style=flat)](https://hub.docker.com/r/arcaneio/docker-cron/)
-[![Docker Automated build](https://img.shields.io/docker/automated/arcaneio/docker-cron.svg?style=flat)](https://hub.docker.com/r/arcaneio/docker-cron/)
-[![Docker Build Status](https://img.shields.io/docker/build/arcaneio/docker-cron.svg?style=flat)](https://hub.docker.com/r/arcaneio/docker-cron/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/arcaneio/crontab.svg?style=flat)](https://hub.docker.com/r/arcaneio/crontab/)
+[![Docker Automated build](https://img.shields.io/docker/automated/arcaneio/crontab.svg?style=flat)](https://hub.docker.com/r/arcaneio/crontab/)
+[![Docker Build Status](https://img.shields.io/docker/build/arcaneio/crontab.svg?style=flat)](https://hub.docker.com/r/arcaneio/crontab/)
 [![license](https://img.shields.io/github/license/arcane-io/docker-cron.svg)](https://github.com/arcane-io/docker-cron)
 
 ## Usage
@@ -24,9 +24,9 @@ version: '3'
 
 services:
   cron:
-    image: arcaneio/docker-cron
+    image: arcaneio/crontab
     container_name: arcaneio-cron-example
-    environment: 
+    environment:
       CRON_SAMPLE: '* * * * * echo 1 minute cron'
       CRON_ANOTHER_SAMPLE: '*/5 * * * * echo 5 minute cron'
 ```
@@ -42,7 +42,7 @@ volumes:
   local-data:
 
 services:
-  consumer: 
+  consumer:
     image: httpd
     container_name: ftp-data-consumer
     ports:
@@ -50,7 +50,7 @@ services:
     volumes:
       - local-data:/usr/local/apache2/htdocs/data
   cron:
-    image: arcaneio/docker-cron
+    image: arcaneio/crontab
     container_name: test-data-sync
     environment:
       CRON_RSYNC: '*/5 * * * * lftp -c "set ftp:list-options -a; open ftp://tgftp.nws.noaa.gov/data/tampa/; lcd /opt/synchronized-data; mirror --only-missing --only-newer --verbose --delete --allow-chown --allow-suid --no-umask --parallel=5"​'
@@ -79,7 +79,7 @@ services:
     volumes:
       - local-data:/usr/local/apache2/htdocs/data
   cron:
-    image: arcaneio/docker-cron
+    image: arcaneio/crontab
     container_name: test-data-sync
     environment:
       CRON_RSYNC: "*/5 * * * * rsync -rzvt --inplace --update --progress --stats /opt/ftp-data/ /opt/synchronized-data"

@@ -2,7 +2,7 @@ version: '3'
 
 services:
   cron:
-    image: arcaneio/docker-cron
+    image: arcaneio/crontab
     container_name: arcaneio-cron-example
     environment: 
       CRON_SAMPLE: '* * * * * echo 1 minute cron'
