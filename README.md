@@ -1,4 +1,4 @@
-# docker-cron
+# Docker Crontab
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/arcaneio/crontab.svg?style=flat)](https://hub.docker.com/r/arcaneio/crontab/)
 [![Docker Automated build](https://img.shields.io/docker/automated/arcaneio/crontab.svg?style=flat)](https://hub.docker.com/r/arcaneio/crontab/)

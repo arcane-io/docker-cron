@@ -2,6 +2,8 @@
 
 touch /var/log/cron.log 
 
+echo -e "\n=== prepare crond config ===\n"
+
 cronfile=/etc/crontabs/root
 echo "" > $cronfile
 for cronvar in ${!CRON_*}; do
@@ -11,3 +13,8 @@ done
 echo "" >> $cronfile
 
 crond
+
+echo -e "\n=== crond service started ===\n"
+
+# as 'sleep infinity' does not works on alpine we improvise asimple sleep
+while sleep 3600; do :; done

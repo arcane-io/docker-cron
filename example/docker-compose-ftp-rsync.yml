@@ -16,7 +16,7 @@ services:
     volumes:
       - local-data:/usr/local/apache2/htdocs/data
   cron:
-    image: arcaneio/docker-cron
+    image: arcaneio/crontab
     container_name: test-data-sync
     environment: 
       CRON_RSYNC: "*/5 * * * * rsync -rzvt --inplace --update --progress --stats /opt/ftp-data/ /opt/synchronized-data"
