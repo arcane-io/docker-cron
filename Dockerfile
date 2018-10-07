@@ -1,4 +1,4 @@
-FROM arcaneio/mini-tools
+FROM arcaneio/mini-tools:1.1
 
 RUN apk add --no-cache \
             lftp 
