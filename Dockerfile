@@ -1,12 +1,12 @@
-FROM arcaneio/mini-tools:1.1
+FROM tinslice/crontab:1.0
 
 RUN apk add --no-cache \
+            bzip2 \
+            gzip \
+            tar \
+            curl \
+            jq \
+            wget \
+            ca-certificates \
+            rsync \
             lftp 
-            
-RUN mkdir /opt /opt/scripts
-
-COPY scripts/* /opt/scripts/
-
-RUN chmod +x -R /opt/scripts
-
-ADD fs/etc/supervisord.d/* /etc/supervisord.d/
